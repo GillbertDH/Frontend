@@ -54,8 +54,8 @@ body {
 
 /* 개별 카드 디자인 */
 .card {
-    width: 150px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     border: 1px solid #eee;
