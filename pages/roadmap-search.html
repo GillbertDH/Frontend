@@ -1,78 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>전체 로드맵 검색</title>
-    <link rel="stylesheet" href="../css/roadmap.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="../css/roadmap.css" />
+  </head>
+  <body>
     <div class="main-wrapper">
-        
-        <div class="section-title" style="margin-bottom: 10px;">전체 로드맵 찾기</div>
-        
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="ADsP, 토익 등 자격증 검색" onkeyup="filterRoadmaps()">
-            <button class="search-btn">🔍</button>
-        </div>
+      <div class="section-title" style="margin-bottom: 10px">
+        전체 로드맵 찾기
+      </div>
 
-        <div class="section">
-            <div class="card-grid" id="resultGrid">
-                </div>
-        </div>
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="ADsP, 토익 등 자격증 검색"
+          onkeyup="filterRoadmaps()"
+        />
+        <button class="search-btn">🔍</button>
+      </div>
 
+      <div class="section">
+        <div class="card-grid" id="resultGrid"></div>
+      </div>
     </div>
-
-    <script>
-        // 1. 전체 로드맵 가짜 데이터 (백엔드가 없으니 일단 여기에 만들어 둡니다)
-        const allRoadmaps = [
-            { id: 1, title: "ADsP 3주 단기합격" },
-            { id: 2, title: "노베이스 ADsP 합격" },
-            { id: 3, title: "정보처리기사 필기" },
-            { id: 4, title: "정보처리기사 실기" },
-            { id: 5, title: "토익 900점 한달 완성" },
-            { id: 6, title: "컴퓨터활용능력 1급" }
-        ];
-
-        const resultGrid = document.getElementById('resultGrid');
-
-        // 2. 화면에 카드를 그려주는 함수
-        function displayCards(dataList) {
-            resultGrid.innerHTML = ''; // 일단 기존 카드를 다 지웁니다.
-            
-            dataList.forEach(item => {
-                // 백틱(`)을 사용하면 HTML 코드 안에 변수(${item.title})를 쏙쏙 넣을 수 있습니다.
-                const cardHTML = `
-                    <div class="card" onclick="goToDetail(${item.id})">
-                        <div class="card-img-placeholder"></div>
-                        <div class="card-title">${item.title}</div>
-                    </div>
-                `;
-                resultGrid.innerHTML += cardHTML;
-            });
-        }
-
-        // 3. 검색어에 맞게 필터링하는 함수
-        function filterRoadmaps() {
-            // 검색창에 입력된 글자를 가져옵니다.
-            const keyword = document.getElementById('searchInput').value;
-            
-            // 전체 데이터 중 제목에 검색어가 포함된 것만 추려냅니다.
-            const filteredData = allRoadmaps.filter(item => item.title.includes(keyword));
-            
-            // 추려낸 데이터로 화면을 다시 그립니다.
-            displayCards(filteredData);
-        }
-
-        // 4. 카드를 클릭했을 때 다음 화면으로 넘어가는 함수 (미리 만들어 둠)
-        function goToDetail(roadmapId) {
-            alert(roadmapId + "번 로드맵 상세 화면(Frame 9)으로 이동합니다!");
-            // 나중에 window.location.href = 'roadmap-detail.html'; 로 바꿀 예정
-        }
-
-        // 5. 처음 화면이 켜졌을 때는 전체 목록을 보여줍니다.
-        displayCards(allRoadmaps);
-    </script>
-</body>
+    
+    <script src="../js/search.js"></script>
+  </body>
 </html>

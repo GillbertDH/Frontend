@@ -1,58 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>메인 화면 - 내 로드맵</title>
-    <link rel="stylesheet" href="../css/roadmap.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="../css/roadmap.css" />
+  </head>
+  <body>
     <div class="main-wrapper">
-        
-        <div class="search-bar">
-            <input type="text" placeholder="검색어를 입력하세요">
-            <button class="search-btn">🔍</button>
+      <div class="search-bar">
+        <input type="text" placeholder="검색어를 입력하세요" />
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">내 구매 내역</h3>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-img-placeholder"></div>
+            <div class="card-title">Toeic: 950점 달성</div>
+          </div>
+
+          <div class="card">
+            <div class="card-img-placeholder"></div>
+            <div class="card-title">취업: 00기업 취업</div>
+          </div>
+
+          <div class="card">
+            <div class="card-img-placeholder"></div>
+            <div class="card-title">정보처리기사</div>
+          </div>
+
+          <div class="card add-card">
+            <span>+</span>
+          </div>
         </div>
-
-        <div class="section">
-            <h3 class="section-title">내 구매 내역</h3>
-            
-            <div class="card-grid">
-                
-                <div class="card">
-                    <div class="card-img-placeholder"></div>
-                    <div class="card-title">Toeic: 950점 달성</div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-placeholder"></div>
-                    <div class="card-title">취업: 00기업 취업</div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-placeholder"></div>
-                    <div class="card-title">정보처리기사</div>
-                </div>
-
-                <div class="card add-card">
-                    <span>+</span>
-                </div>
-
-            </div>
-        </div>
-
+      </div>
     </div>
 
-
-    <script>
-        // 클래스 이름이 'add-card'인 요소를 찾아서 클릭 이벤트를 달아줍니다.
-        const addBtn = document.querySelector('.add-card');
-        addBtn.addEventListener('click', function() {
-            // 클릭하면 검색 화면으로 이동
-            window.location.href = 'roadmap-search.html';
-        });
-    </script>
-  
-</body>
+    <script src="../js/main.js"></script>
+  </body>
 </html>
