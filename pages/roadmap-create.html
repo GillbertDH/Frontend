@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>새 로드맵 생성</title>
+    <link rel="stylesheet" href="../css/roadmap.css">
+</head>
+<body>
+    <div class="create-wrapper">
+        <h2>새 로드맵 생성</h2>
+        
+        <div class="form-box">
+            <div class="input-row"><label>제목</label><input type="text" id="title" placeholder="예: 정보처리기사 실기"></div>
+            <div class="input-row"><label>간단 설명</label><input type="text" id="description" placeholder="로드맵 목표를 적어주세요"></div>
+            <div class="input-row"><label>기간</label><input type="text" id="duration" placeholder="예: 4주"></div>
+            <div class="input-row"><label>난이도</label><input type="text" id="difficulty" placeholder="예: 상"></div>
+            <div class="input-row"><label>시작 수준</label><input type="text" id="startLevel" placeholder="예: 전공자"></div>
+        </div>
+
+        <div id="weeksContainer"></div>
+
+        <button id="addWeekBtn">+ 주차 추가</button>
+        <button id="submitBtn">로드맵 생성 완료</button>
+    </div>
+
+    <script src="../js/create.js"></script>
+</body>
+</html>
