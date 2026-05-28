@@ -1,50 +1,101 @@
-// 1. 전체 로드맵 가짜 데이터 (백엔드가 없으니 일단 여기에 만들어 둡니다)
-const allRoadmaps = [
-  { id: 1, title: "ADsP 3주 단기합격" },
-  { id: 2, title: "노베이스 ADsP 합격" },
-  { id: 3, title: "정보처리기사 필기" },
-  { id: 4, title: "정보처리기사 실기" },
-  { id: 5, title: "토익 900점 한달 완성" },
-  { id: 6, title: "컴퓨터활용능력 1급" },
+const mockRoadmaps = [
+  {
+    id: 1,
+    title: "ADsP 3주 단기합격",
+    description: "노베이스도 가능한 ADsP 합격 로드맵입니다.",
+    duration: "3주",
+    difficulty: "중상",
+    startLevel: "비전공자"
+  },
+  {
+    id: 2,
+    title: "노베이스 ADsP 합격",
+    description: "처음 시작하는 사람을 위한 ADsP 로드맵입니다.",
+    duration: "4주",
+    difficulty: "중",
+    startLevel: "초보자"
+  },
+  {
+    id: 3,
+    title: "정보처리기사 실기",
+    description: "한 달 만에 끝내는 정처기 실기 로드맵입니다.",
+    duration: "4주",
+    difficulty: "상",
+    startLevel: "전공자"
+  },
+  {
+    id: 4,
+    title: "TOEIC 950점 달성",
+    description: "토익 고득점을 목표로 하는 2개월 집중 로드맵입니다.",
+    duration: "2개월",
+    difficulty: "상",
+    startLevel: "700점 이상"
+  }
 ];
 
-const resultGrid = document.getElementById("resultGrid");
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+const resultContainer = document.getElementById("resultContainer");
+const resultCount = document.getElementById("resultCount");
 
-// 2. 화면에 카드를 그려주는 함수
-function displayCards(dataList) {
-  resultGrid.innerHTML = ""; // 일단 기존 카드를 다 지웁니다.
+function renderRoadmapCards(roadmaps) {
+  resultCount.textContent = `${roadmaps.length}개`;
 
-  dataList.forEach((item) => {
-    // 백틱(`)을 사용하면 HTML 코드 안에 변수(${item.title})를 쏙쏙 넣을 수 있습니다.
-    const cardHTML = `
-                    <div class="card" onclick="goToDetail(${item.id})">
-                        <div class="card-img-placeholder"></div>
-                        <div class="card-title">${item.title}</div>
-                    </div>
-                `;
-    resultGrid.innerHTML += cardHTML;
+  if (roadmaps.length === 0) {
+    resultContainer.innerHTML = `
+      <div class="empty-result">
+        <p>검색 결과가 없습니다.</p>
+        <span>다른 키워드로 검색해보세요.</span>
+      </div>
+    `;
+    return;
+  }
+
+  resultContainer.innerHTML = roadmaps
+    .map((roadmap) => {
+      return `
+        <button class="roadmap-card" data-id="${roadmap.id}">
+          <div class="card-thumbnail"></div>
+          <h3>${roadmap.title}</h3>
+          <p>${roadmap.description}</p>
+          <span>${roadmap.duration} · ${roadmap.difficulty} · ${roadmap.startLevel}</span>
+        </button>
+      `;
+    })
+    .join("");
+
+  const cards = document.querySelectorAll(".roadmap-card");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const roadmapId = card.dataset.id;
+      location.href = `loadmap-detail.html?id=${roadmapId}`;
+    });
   });
 }
 
-// 3. 검색어에 맞게 필터링하는 함수
-function filterRoadmaps() {
-  // 검색창에 입력된 글자를 가져옵니다.
-  const keyword = document.getElementById("searchInput").value;
+function searchRoadmaps() {
+  const keyword = searchInput.value.trim().toLowerCase();
 
-  // 전체 데이터 중 제목에 검색어가 포함된 것만 추려냅니다.
-  const filteredData = allRoadmaps.filter((item) =>
-    item.title.includes(keyword),
-  );
+  const filteredRoadmaps = mockRoadmaps.filter((roadmap) => {
+    return (
+      roadmap.title.toLowerCase().includes(keyword) ||
+      roadmap.description.toLowerCase().includes(keyword) ||
+      roadmap.duration.toLowerCase().includes(keyword) ||
+      roadmap.difficulty.toLowerCase().includes(keyword) ||
+      roadmap.startLevel.toLowerCase().includes(keyword)
+    );
+  });
 
-  // 추려낸 데이터로 화면을 다시 그립니다.
-  displayCards(filteredData);
+  renderRoadmapCards(filteredRoadmaps);
 }
 
-// 4. 카드를 클릭했을 때 다음 화면으로 넘어가는 함수
-function goToDetail(roadmapId) {
-  // 상세 페이지 이름(loadmap-detail.html) 뒤에 ?id=번호 형식으로 꼬리표를 달아 이동합니다.
-  window.location.href = `loadmap-detail.html?id=${roadmapId}`;
-}
+searchButton.addEventListener("click", searchRoadmaps);
 
-// 5. 처음 화면이 켜졌을 때는 전체 목록을 보여줍니다.
-displayCards(allRoadmaps);
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    searchRoadmaps();
+  }
+});
+
+renderRoadmapCards(mockRoadmaps);

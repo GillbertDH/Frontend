@@ -1,87 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>로드맵 상세</title>
-    <link rel="stylesheet" href="../css/roadmap.css" />
-    <style>
-      /* 상세 페이지 전용 추가 스타일 (나중에 css 파일로 빼도 됨) */
-      .detail-header {
-        text-align: center;
-        margin-bottom: 30px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로드맵 상세 | 꿈조각</title>
+  <link rel="stylesheet" href="../css/roadmap.css" />
+</head>
+<body>
+  <header class="header">
+    <button class="logo-button" onclick="location.href='roadmap-search.html'">
+      <h1>꿈조각</h1>
+      <p>목표를 이룬 사람들의 로드맵 거래 플랫폼</p>
+    </button>
+  </header>
 
-      .detail-header h2 {
-        font-size: 24px;
-        margin-bottom: 15px;
-      }
+  <main class="container">
+    <button class="back-button" onclick="history.back()">← 뒤로가기</button>
 
-      .meta-info {
-        text-align: left;
-        font-size: 14px;
-        color: #333;
-        margin-bottom: 40px;
-      }
+    <section id="detailContainer" class="detail-card">
+      <!-- detail.js에서 상세 화면을 동적으로 넣음 -->
+    </section>
+  </main>
 
-      .meta-info p {
-        margin: 5px 0;
-      }
-
-      /* 주차별 내용 레이아웃 */
-      .week-row {
-        display: flex;
-        margin-bottom: 25px;
-        align-items: flex-start;
-      }
-
-      /* 1주차, 2주차 회색 박스 */
-      .week-label {
-        background-color: #d9d9d9;
-        padding: 8px 15px;
-        font-weight: bold;
-        font-size: 14px;
-        width: 50px;
-        text-align: center;
-        margin-right: 20px;
-      }
-
-      /* 체크박스들이 들어가는 오른쪽 영역 */
-      .task-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding-top: 5px;
-      }
-
-      .task-item {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-      }
-
-      .task-item input[type="checkbox"] {
-        margin-right: 10px;
-        width: 16px;
-        height: 16px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="main-wrapper">
-      <div class="detail-header">
-        <h2 id="roadmapTitle">데이터 불러오는 중...</h2>
-      </div>
-
-      <div class="meta-info">
-        <p>기간: <span id="roadmapDuration">-</span></p>
-        <p>난이도: <span id="roadmapLevel">-</span></p>
-        <p>시작 수준: <span id="roadmapBase">-</span></p>
-      </div>
-
-      <div id="weeksContainer"></div>
-    </div>
-    <script src="../js/detail.js"></script>
-  </body>
+  <script src="../js/detail.js"></script>
+</body>
 </html>
