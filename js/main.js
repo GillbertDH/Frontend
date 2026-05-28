@@ -8,24 +8,20 @@ const myPurchasedRoadmaps = [
 
 const addBtn = document.getElementById('addBtn');
 
-// 데이터를 바탕으로 카드를 생성하고 화면에 그리는 함수
 function renderRoadmaps() {
-    
     const cardsHtml = myPurchasedRoadmaps.map(roadmap => `
-        <div class="card">
-            <div class="card-img-placeholder"></div>
-            <div class="card-title">${roadmap.title}</div>
-        </div>
+        <button class="roadmap-card" onclick="window.location.href='loadmap-detail.html?id=${roadmap.id}'">
+            <div class="card-thumbnail"></div>
+            <h3>${roadmap.title}</h3>
+            <span style="display:inline-block; margin-top:10px; color:#0f766e; font-weight:bold;">이어서 학습하기 &rarr;</span>
+        </button>
     `).join('');
 
-    // '+' 버튼 요소 바로 앞(beforebegin)에 생성된 카드 HTML을 삽입
     addBtn.insertAdjacentHTML('beforebegin', cardsHtml);
 }
 
-
 renderRoadmaps();
 
-// 4. 기존 추가 버튼 클릭 이벤트 (검색 화면 이동)
 addBtn.addEventListener('click', function() {
     window.location.href = 'roadmap-search.html';
 });

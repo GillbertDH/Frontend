@@ -4,21 +4,20 @@ const submitBtn = document.getElementById('submitBtn');
 
 let weekCount = 0;
 
-// --- 🌟 (신규) 주차 번호 재정렬 함수 ---
+// --- 🌟 주차 번호 재정렬 함수 ---
 function updateWeekNumbers() {
     const blocks = document.querySelectorAll('.week-block');
-    weekCount = blocks.length; // 현재 남아있는 블록 개수로 weekCount 갱신
+    weekCount = blocks.length; 
     
-    // 남은 블록들을 처음부터 돌면서 1번부터 새롭게 번호를 부여합니다.
     blocks.forEach((block, index) => {
         const newNum = index + 1;
         block.id = `week-${newNum}`;
-        block.querySelector('.week-title').innerText = `${newNum}주차`;
+        // 새 디자인에 맞춰 클래스명을 .week-label로 변경
+        block.querySelector('.week-label').innerText = `${newNum}주차`;
     });
 }
 
 weeksContainer.addEventListener('click', (e) => {
-    // 클릭된 요소가 '삭제' 버튼인지 확인합니다.
     if (e.target.classList.contains('delete-week-btn')) {
         e.target.closest('.week-block').remove();
         updateWeekNumbers();
@@ -40,13 +39,14 @@ addWeekBtn.addEventListener('click', () => {
 
     weekCount++;
     
+    // 새 디자인이 적용된 주차별 입력 폼
     const weekHtml = `
-        <div class="week-block" id="week-${weekCount}" style="margin-top: 15px; padding: 10px; border: 1px dashed #ccc;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <h4 class="week-title" style="margin: 0;">${weekCount}주차</h4>
-                <button type="button" class="delete-week-btn" style="background: #ff4d4d; color: white; border: none; padding: 4px 8px; cursor: pointer; font-size: 12px;">삭제</button>
+        <div class="week-block" id="week-${weekCount}" style="margin-top: 16px; padding: 18px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #f8fafc;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div class="week-label" style="margin:0; font-weight:bold; background:#e2e8f0; padding:8px 12px; border-radius:8px;">${weekCount}주차</div>
+                <button type="button" class="delete-week-btn" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold;">삭제</button>
             </div>
-            <input type="text" class="task-input" placeholder="할 일을 쉼표(,)로 구분해 적어주십시오." style="width: 100%; box-sizing: border-box; padding: 5px;">
+            <input type="text" class="task-input" placeholder="할 일을 쉼표(,)로 구분해 적어주십시오." style="width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-size: 14px;">
         </div>
     `;
     weeksContainer.insertAdjacentHTML('beforeend', weekHtml);
