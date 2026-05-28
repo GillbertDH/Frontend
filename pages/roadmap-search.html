@@ -1,41 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>전체 로드맵 검색</title>
-    <link rel="stylesheet" href="../css/roadmap.css" />
-  </head>
-  <body>
-    <div class="main-wrapper">
-      
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px">
-        <div class="section-title" style="margin: 0;">
-          전체 로드맵 찾기
-        </div>
-        
-        <button 
-          onclick="window.location.href='roadmap-create.html'" 
-          style="padding: 6px 12px; background-color: #555; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
-          + 임시 생성
-        </button>
-      </div>
-      
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로드맵 검색 | 꿈조각</title>
+  <link rel="stylesheet" href="../css/roadmap.css" />
+</head>
+<body>
+  <header class="header">
+    <button class="logo-button" onclick="location.href='main.html'">
+      <h1>꿈조각</h1>
+      <p>목표를 이룬 사람들의 로드맵 거래 플랫폼</p>
+    </button>
+  </header>
+
+  <main class="container">
+    <section class="search-section">
       <div class="search-bar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="ADsP, 토익 등 자격증 검색"
-          onkeyup="filterRoadmaps()"
+        <input 
+          id="searchInput" 
+          type="text" 
+          placeholder="예: ADsP 합격, 정보처리기사, 토익" 
         />
-        <button class="search-btn">🔍</button>
+        <button id="searchButton" class="search-button">검색</button>
+      </div>
+    </section>
+
+    <section class="result-section">
+      <div class="section-title">
+        <h2>검색 결과</h2>
+        <span id="resultCount">0개</span>
       </div>
 
-      <div class="section">
-        <div class="card-grid" id="resultGrid"></div>
-      </div>
-    </div>
-    
-    <script src="../js/search.js"></script>
-  </body>
+      <div id="resultContainer" class="card-grid"></div>
+    </section>
+  </main>
+
+  <script src="../js/search.js"></script>
+</body>
 </html>
