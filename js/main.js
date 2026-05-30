@@ -1,27 +1,76 @@
 // 1. 임시 데이터 (나중에 백엔드에서 받아올 내 구매 내역 데이터)
-const myPurchasedRoadmaps = [
-    { id: 1, title: "Toeic: 950점 달성" },
-    { id: 2, title: "취업: 00기업 취업" },
-    { id: 3, title: "정보처리기사" },
-    { id: 4, title: "정보처리기사2" }
-];
+const PURCHASED_LIST_KEY = "purchased-roadmap-ids";
 
 const addBtn = document.getElementById('addBtn');
 
-function renderRoadmaps() {
-    const cardsHtml = myPurchasedRoadmaps.map(roadmap => `
-        <button class="roadmap-card" onclick="window.location.href='loadmap-detail.html?id=${roadmap.id}'">
-            <div class="card-thumbnail"></div>
-            <h3>${roadmap.title}</h3>
-            <span style="display:inline-block; margin-top:10px; color:#0f766e; font-weight:bold;">이어서 학습하기 &rarr;</span>
-        </button>
-    `).join('');
+// 백엔드에서 내 구매 내역 가져오기
+async function getPurchasedRoadmaps() {
+  try {
+    const response = await fetch("/api/v1/users/me/purchases", {
+      method: "GET",
+      credentials: "include"
+    });
 
-    addBtn.insertAdjacentHTML('beforebegin', cardsHtml);
+    if (!response.ok) return [];
+
+    return response.json();
+  } catch (error) {
+    console.error("구매 내역 조회 실패:", error);
+    return [];
+  }
 }
 
+async function renderRoadmaps() {
+  const myPurchasedRoadmaps = await getPurchasedRoadmaps();
+
+  if (myPurchasedRoadmaps.length === 0) {
+    const emptyHtml = `
+      <div class="empty-purchased-message" style="padding: 30px; text-align: center; color: #777;">
+        아직 구매한 로드맵이 없습니다.<br>
+        원하는 로드맵을 검색하고 구매해보세요!
+      </div>
+    `;
+
+    addBtn.insertAdjacentHTML("beforebegin", emptyHtml);
+    return;
+  }
+
+  const cardsHtml = myPurchasedRoadmaps.map(roadmap => `
+    <button class="roadmap-card" onclick="window.location.href='loadmap-detail.html?id=${roadmap.id}'">
+      <div class="card-thumbnail"></div>
+      <h3>${roadmap.title}</h3>
+      <span style="display:inline-block; margin-top:10px; color:#0f766e; font-weight:bold;">이어서 학습하기 &rarr;</span>
+    </button>
+  `).join("");
+
+  addBtn.insertAdjacentHTML("beforebegin", cardsHtml);
+}
 renderRoadmaps();
 
 addBtn.addEventListener('click', function() {
     window.location.href = 'roadmap-search.html';
 });
+
+const mainSearchInput = document.getElementById("mainSearchInput");
+const mainSearchButton = document.getElementById("mainSearchButton");
+
+function moveToSearchPage() {
+  const keyword = mainSearchInput.value.trim();
+
+  if (!keyword) {
+    location.href = "roadmap-search.html";
+    return;
+  }
+
+  location.href = `roadmap-search.html?keyword=${encodeURIComponent(keyword)}`;
+}
+
+if (mainSearchButton && mainSearchInput) {
+  mainSearchButton.addEventListener("click", moveToSearchPage);
+
+  mainSearchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      moveToSearchPage();
+    }
+  });
+}

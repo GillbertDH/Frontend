@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>꿈조각 | 로그인</title>
-    <link rel="stylesheet" href="css/login.css">
+    <title>꿈조각 | 회원가입</title>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
     <div class="auth-page">
@@ -15,8 +15,8 @@
             </div>
 
             <div class="auth-box">
-                <h2 class="auth-title">로그인</h2>
-                <p class="auth-subtitle">나만의 목표를 향한 로드맵을 시작해보세요</p>
+                <h2 class="auth-title">회원가입</h2>
+                <p class="auth-subtitle">새 계정을 만들고 나만의 목표 로드맵을 시작해보세요</p>
 
                 <div class="input-group">
                     <label for="userid">아이디</label>
@@ -28,20 +28,25 @@
                     <input type="password" id="userpw" placeholder="비밀번호를 입력하세요">
                 </div>
 
+                <div class="input-group">
+                    <label for="userpwCheck">비밀번호 확인</label>
+                    <input type="password" id="userpwCheck" placeholder="비밀번호를 다시 입력하세요">
+                </div>
+
                 <div id="errorMessage" class="error-message">
                     아이디와 비밀번호를 모두 입력해주세요.
                 </div>
 
-                <button class="auth-button" id="loginBtn">로그인</button>
+                <button class="auth-button" id="registerBtn">회원가입</button>
 
                 <div class="auth-footer">
-                    <span>아직 계정이 없으신가요?</span>
-                    <a href="pages/register.html">회원가입</a>
+                    <span>이미 계정이 있으신가요?</span>
+                    <a href="../login.html">로그인</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/login.js"></script>
+    <script src="../js/register.js"></script>
 </body>
 </html>
